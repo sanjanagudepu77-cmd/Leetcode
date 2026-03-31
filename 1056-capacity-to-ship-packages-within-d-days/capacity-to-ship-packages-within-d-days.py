@@ -17,7 +17,6 @@ class Solution:
         while l<=h:
             mid=(l+h)//2
             if possible(mid):
-                ans=mid
                 h=mid-1
             else:
                 l=mid+1
