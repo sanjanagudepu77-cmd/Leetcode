@@ -1,6 +1,6 @@
 class Solution:
     def eventualSafeNodes(self, graph: List[List[int]]) -> List[int]:
-        n=len(graph)
+        '''n=len(graph)
         v=[0]*n
         pv=[0]*n
         check=[0]*n
@@ -23,11 +23,11 @@ class Solution:
         for i in range(n):
             if check[i]==1:
                 safe.append(i)
-        return safe
+        return safe'''
 #now using bfs
 #now reducing space complexity
 #0 is unvisited,1 is visited,2 is safe
-        '''n=len(graph)
+        n=len(graph)
         states=[0]*n
         def dfs(node):
             if states[node]!=0:
@@ -42,5 +42,5 @@ class Solution:
         for i in range(n):
             if dfs(i):
                 ans.append(i)
-        return ans'''
+        return ans
         
