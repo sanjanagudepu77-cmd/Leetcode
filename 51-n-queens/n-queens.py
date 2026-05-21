@@ -1,6 +1,6 @@
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
-        board=[["."]*n for i in range (n)]
+        '''board=[["."]*n for i in range (n)]
         res=[]
         def issafe(board,r,c):
             for i in range(r-1,-1,-1):
@@ -29,5 +29,41 @@ class Solution:
                     bt(row+1,n,board,res)
                     board[row][col]="."
         bt(0,n,board,res)
+        return res'''
+        board = [["."] * n for _ in range(n)]
+        res = []
+        def issafe(board, row, col):
+            # check same column (above rows)
+            r = row - 1
+            while r >= 0:
+                if board[r][col] == 'Q':
+                    return False
+                r -= 1
+            # check left diagonal
+            r, c = row - 1, col - 1
+            while r >= 0 and c >= 0:
+                if board[r][c] == 'Q':
+                    return False
+                r -= 1
+                c -= 1
+            # check right diagonal
+            r, c = row - 1, col + 1
+            while r >= 0 and c < n:
+                if board[r][c] == 'Q':
+                    return False
+                r -= 1
+                c += 1
+            return True
+        def bt(row, n, board, res):
+            if row == n:
+                res.append(["".join(r) for r in board])
+                return
+            for col in range(n):
+                if issafe(board, row, col):
+                    board[row][col] = 'Q'
+                    bt(row + 1, n, board, res)
+                    board[row][col] = '.'
+        bt(0, n, board, res)
         return res
+        
         
