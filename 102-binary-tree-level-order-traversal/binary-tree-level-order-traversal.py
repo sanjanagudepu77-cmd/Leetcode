@@ -9,12 +9,12 @@ class Solution:
         if not root:
             return []
         ans = []
-        queue = deque([root])
+        queue = [root]
         while queue:
             level = []
             size = len(queue)
             for _ in range(size):
-                node = queue.popleft()
+                node = queue.pop(0)
                 level.append(node.val)
                 if node.left:
                     queue.append(node.left)
