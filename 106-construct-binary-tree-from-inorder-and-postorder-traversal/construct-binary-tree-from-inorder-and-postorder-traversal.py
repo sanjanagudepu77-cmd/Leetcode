@@ -6,7 +6,7 @@
 #         self.right = right
 class Solution:
     def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
-        inorder_map = {}
+        '''inorder_map = {}
         for i in range(len(inorder)):
             inorder_map[inorder[i]] = i
         self.post_index = len(postorder) - 1
@@ -20,4 +20,26 @@ class Solution:
             root.right = helper(mid + 1, right)
             root.left = helper(left, mid - 1)
             return root
-        return helper(0, len(inorder) - 1)
+        return helper(0, len(inorder) - 1)'''
+        inMap = {}
+        for i in range(len(inorder)):
+            inMap[inorder[i]] = i
+        return self.build(postorder, 0, len(postorder)-1,inorder, 0, len(inorder)-1,
+                          inMap)
+    def build(self, postorder, postStart, postEnd,inorder, inStart, inEnd, inMap):
+        # Base case
+        if postStart > postEnd or inStart > inEnd:
+            return None
+        # 🔥 ROOT is LAST element in postorder
+        root = TreeNode(postorder[postEnd])
+        # find root in inorder
+        inRoot = inMap[root.val]
+        # left subtree size
+        numsLeft = inRoot - inStart
+        # build left subtree FIRST
+        root.left = self.build(postorder,postStart,postStart + numsLeft - 1,inorder,
+            inStart,inRoot - 1,inMap)
+        # build right subtree SECOND
+        root.right = self.build(postorder,postStart + numsLeft,postEnd - 1,inorder,
+            inRoot + 1,inEnd,inMap)
+        return root
