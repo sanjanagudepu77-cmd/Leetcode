@@ -30,7 +30,7 @@ class Solution:
         # Base case
         if postStart > postEnd or inStart > inEnd:
             return None
-        # 🔥 ROOT is LAST element in postorder
+        #  ROOT is LAST element in postorder
         root = TreeNode(postorder[postEnd])
         # find root in inorder
         inRoot = inMap[root.val]
